@@ -192,7 +192,7 @@
             <div class="video-container">
                 <div class="video-wrapper">
                     <iframe id="youtube-player"
-                        src="https://www.youtube.com/embed/MDBykpSXsSE"
+                        src="https://www.youtube.com/embed/MDBykpSXsSE?enablejsapi=1"
                         frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         allowfullscreen>
@@ -241,19 +241,29 @@
         </div>
     </div>
 
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script>
-        // Set up marker click handlers to open YouTube with timestamp
-        document.addEventListener('DOMContentLoaded', function() {
-            const videoId = 'MDBykpSXsSE';
+        let player;
 
+        // YouTube IFrame API
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            // Set up marker click handlers
             document.querySelectorAll('.marker-item').forEach(item => {
                 item.addEventListener('click', function() {
                     const time = parseInt(this.dataset.time);
-                    const url = `https://www.youtube.com/watch?v=${videoId}&t=${time}s`;
-                    window.open(url, '_blank');
+                    player.seekTo(time, true);
+                    player.playVideo();
                 });
             });
-        });
+        }
     </script>
 </body>
 </html>
