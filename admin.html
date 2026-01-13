@@ -290,12 +290,12 @@
                 <h3 style="margin-bottom: 15px; color: #333;">Timestamps & Annotations</h3>
                 <div id="markers-container">
                     <div class="marker-input">
-                        <input type="number" placeholder="Seconds" class="marker-time" required>
+                        <input type="text" placeholder="mm:ss" class="marker-time" pattern="[0-9]+:[0-5][0-9]" required>
                         <input type="text" placeholder="What to listen for..." class="marker-text" required>
-                        <button type="button" class="remove-marker" onclick="removeMarker(this)">×</button>
+                        <button type="button" class="remove-marker">×</button>
                     </div>
                 </div>
-                <button type="button" class="add-marker" onclick="addMarker()">+ Add Marker</button>
+                <button type="button" class="add-marker" id="add-marker-btn">+ Add Marker</button>
             </div>
 
             <div class="links-section">
@@ -316,7 +316,7 @@
 
             <div class="button-group">
                 <button type="submit" class="btn btn-primary">Generate Page Code</button>
-                <button type="button" class="btn btn-secondary" onclick="resetForm()">Clear Form</button>
+                <button type="button" class="btn btn-secondary" id="reset-btn">Clear Form</button>
             </div>
         </form>
 
@@ -324,7 +324,7 @@
             <h2>Generated HTML Code</h2>
             <p style="margin-bottom: 15px; color: #666;">Copy this code and save it as a new .html file in your repository</p>
             <div class="code-output" id="code-output"></div>
-            <button class="copy-btn" onclick="copyCode()">Copy to Clipboard</button>
+            <button class="copy-btn" id="copy-btn">Copy to Clipboard</button>
         </div>
     </div>
 
@@ -336,27 +336,46 @@
             document.getElementById('word-count').textContent = words + ' words';
         });
 
-        // Add marker
-        function addMarker() {
+        // Add marker button
+        document.getElementById('add-marker-btn').addEventListener('click', function() {
             const container = document.getElementById('markers-container');
             const markerDiv = document.createElement('div');
             markerDiv.className = 'marker-input';
             markerDiv.innerHTML = `
-                <input type="number" placeholder="Seconds" class="marker-time" required>
+                <input type="text" placeholder="mm:ss" class="marker-time" pattern="[0-9]+:[0-5][0-9]" required>
                 <input type="text" placeholder="What to listen for..." class="marker-text" required>
-                <button type="button" class="remove-marker" onclick="removeMarker(this)">×</button>
+                <button type="button" class="remove-marker">×</button>
             `;
             container.appendChild(markerDiv);
+            attachRemoveHandlers();
+        });
+
+        // Attach remove handlers to all remove buttons
+        function attachRemoveHandlers() {
+            document.querySelectorAll('.remove-marker').forEach(button => {
+                button.onclick = function() {
+                    const container = document.getElementById('markers-container');
+                    if (container.children.length > 1) {
+                        this.parentElement.remove();
+                    } else {
+                        alert('You must have at least one marker!');
+                    }
+                };
+            });
         }
 
-        // Remove marker
-        function removeMarker(button) {
-            const container = document.getElementById('markers-container');
-            if (container.children.length > 1) {
-                button.parentElement.remove();
-            } else {
-                alert('You must have at least one marker!');
+        // Initialize remove handlers on page load
+        attachRemoveHandlers();
+
+        // Convert mm:ss to seconds
+        function timeToSeconds(timeStr) {
+            const parts = timeStr.split(':');
+            if (parts.length === 2) {
+                const mins = parseInt(parts[0]) || 0;
+                const secs = parseInt(parts[1]) || 0;
+                return mins * 60 + secs;
             }
+            return 0;
         }
 
         // Extract YouTube video ID
@@ -407,16 +426,19 @@
                 return;
             }
 
-            // Get markers
-            const markerTimes = Array.from(document.querySelectorAll('.marker-time')).map(el => parseInt(el.value));
+            // Get markers - convert mm:ss to seconds
+            const markerTimeInputs = Array.from(document.querySelectorAll('.marker-time'));
             const markerTexts = Array.from(document.querySelectorAll('.marker-text')).map(el => el.value);
+
+            const markerTimes = markerTimeInputs.map(el => timeToSeconds(el.value));
+            const markerTimeStrings = markerTimeInputs.map(el => el.value);
 
             // Generate markers HTML
             let markersHtml = '';
             for (let i = 0; i < markerTimes.length; i++) {
                 markersHtml += `
                 <div class="marker-item" data-time="${markerTimes[i]}">
-                    <span class="marker-time">${formatTime(markerTimes[i])}</span>
+                    <span class="marker-time">${markerTimeStrings[i]}</span>
                     <span class="marker-text">${markerTexts[i]}</span>
                 </div>\n`;
             }
@@ -698,26 +720,26 @@ ${streamingLinksHtml}
         });
 
         // Copy to clipboard
-        function copyCode() {
+        document.getElementById('copy-btn').addEventListener('click', function() {
             const code = document.getElementById('code-output').textContent;
             navigator.clipboard.writeText(code).then(() => {
-                const btn = event.target;
-                btn.textContent = '✓ Copied!';
-                btn.style.background = '#28a745';
+                this.textContent = '✓ Copied!';
+                this.style.background = '#28a745';
                 setTimeout(() => {
-                    btn.textContent = 'Copy to Clipboard';
+                    this.textContent = 'Copy to Clipboard';
+                    this.style.background = '#28a745';
                 }, 2000);
             });
-        }
+        });
 
         // Reset form
-        function resetForm() {
+        document.getElementById('reset-btn').addEventListener('click', function() {
             if (confirm('Are you sure you want to clear the form?')) {
                 document.getElementById('song-form').reset();
                 document.getElementById('word-count').textContent = '0 words';
                 document.getElementById('output-section').classList.remove('active');
             }
-        }
+        });
     </script>
 </body>
 </html>
