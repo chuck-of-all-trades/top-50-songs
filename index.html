@@ -50,12 +50,23 @@
         .song-card {
             background: white;
             border-radius: 15px;
-            padding: 25px;
+            overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             transition: transform 0.3s, box-shadow 0.3s;
             text-decoration: none;
             color: inherit;
             display: block;
+        }
+
+        .song-thumbnail {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .song-info {
+            padding: 25px;
         }
 
         .song-card:hover {
@@ -112,22 +123,31 @@
 
         <div class="song-grid">
             <a href="opeth-ghost-of-perdition.html" class="song-card">
-                <div class="song-number">#1</div>
-                <div class="song-title">Ghost of Perdition</div>
-                <div class="song-artist">Opeth</div>
+                <img src="https://img.youtube.com/vi/MDBykpSXsSE/maxresdefault.jpg" alt="Ghost of Perdition" class="song-thumbnail">
+                <div class="song-info">
+                    <div class="song-number">#1</div>
+                    <div class="song-title">Ghost of Perdition</div>
+                    <div class="song-artist">Opeth</div>
+                </div>
             </a>
 
             <a href="pink-floyd-dogs.html" class="song-card">
-                <div class="song-number">#2</div>
-                <div class="song-title">Dogs</div>
-                <div class="song-artist">Pink Floyd</div>
+                <img src="https://img.youtube.com/vi/tq3bYPLBcA4/maxresdefault.jpg" alt="Dogs" class="song-thumbnail">
+                <div class="song-info">
+                    <div class="song-number">#2</div>
+                    <div class="song-title">Dogs</div>
+                    <div class="song-artist">Pink Floyd</div>
+                </div>
             </a>
 
-            <div class="song-card coming-soon">
-                <div class="song-number">#3</div>
-                <div class="song-title">Coming Soon</div>
-                <div class="song-artist">TBA</div>
-            </div>
+            <a href="cult-of-luna-cygnus.html" class="song-card">
+                <img src="https://img.youtube.com/vi/DVdHw4fskj4/maxresdefault.jpg" alt="Cygnus" class="song-thumbnail">
+                <div class="song-info">
+                    <div class="song-number">#3</div>
+                    <div class="song-title">Cygnus</div>
+                    <div class="song-artist">Cult of Luna</div>
+                </div>
+            </a>
         </div>
     </div>
 </body>
