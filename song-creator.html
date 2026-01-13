@@ -5,210 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🎵 Song Page Creator</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 40px 20px;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-        }
-
-        h1 {
-            color: #667eea;
-            margin-bottom: 10px;
-            font-size: 2.5em;
-        }
-
-        .subtitle {
-            color: #666;
-            margin-bottom: 30px;
-            font-size: 1.1em;
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        label {
-            display: block;
-            color: #333;
-            font-weight: 600;
-            margin-bottom: 8px;
-            font-size: 1.1em;
-        }
-
-        input[type="text"],
-        textarea {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 1em;
-            font-family: inherit;
-            transition: border-color 0.3s;
-        }
-
-        input[type="text"]:focus,
-        textarea:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        .helper-text {
-            font-size: 0.9em;
-            color: #666;
-            margin-top: 5px;
-        }
-
-        .markers-section {
-            background: #f8f9fa;
-            padding: 25px;
-            border-radius: 10px;
-            margin-bottom: 25px;
-        }
-
-        .markers-section h3 {
-            color: #333;
-            margin-bottom: 15px;
-        }
-
-        .marker-inputs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-            align-items: flex-start;
-        }
-
-        .marker-inputs input[type="text"]:first-child {
-            width: 100px;
-            flex-shrink: 0;
-        }
-
-        .marker-inputs input[type="text"]:last-child {
-            flex: 1;
-        }
-
-        .btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .btn-add {
-            background: #667eea;
-            color: white;
-            margin-bottom: 15px;
-        }
-
-        .btn-add:hover {
-            background: #5568d3;
-        }
-
-        .markers-list {
-            margin-top: 15px;
-        }
-
-        .marker-item {
-            background: white;
-            padding: 12px;
-            margin-bottom: 8px;
-            border-radius: 6px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .marker-item span {
-            flex: 1;
-        }
-
-        .marker-time-display {
-            color: #667eea;
-            font-weight: bold;
-            margin-right: 10px;
-            min-width: 60px;
-        }
-
-        .btn-remove {
-            background: #ff4444;
-            color: white;
-            padding: 6px 12px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.9em;
-        }
-
-        .btn-remove:hover {
-            background: #cc0000;
-        }
-
-        .button-group {
-            display: flex;
-            gap: 15px;
-            margin-top: 30px;
-        }
-
-        .btn-primary {
-            flex: 1;
-            background: #667eea;
-            color: white;
-            padding: 15px;
-            font-size: 1.1em;
-        }
-
-        .btn-primary:hover {
-            background: #5568d3;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-        }
-
-        .btn-secondary {
-            background: #e0e0e0;
-            color: #333;
-            padding: 15px 30px;
-        }
-
-        .btn-secondary:hover {
-            background: #d0d0d0;
-        }
-
-        .success-message {
-            background: #d4edda;
-            border: 1px solid #c3e6cb;
-            color: #155724;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 20px;
-            display: none;
-        }
-
-        .success-message.show {
-            display: block;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 40px 20px; }
+        .container { max-width: 900px; margin: 0 auto; background: white; border-radius: 20px; padding: 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        h1 { color: #667eea; margin-bottom: 10px; font-size: 2.5em; }
+        .subtitle { color: #666; margin-bottom: 30px; font-size: 1.1em; }
+        .form-group { margin-bottom: 25px; }
+        label { display: block; color: #333; font-weight: 600; margin-bottom: 8px; font-size: 1.1em; }
+        input[type="text"], textarea { width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1em; font-family: inherit; transition: border-color 0.3s; }
+        input[type="text"]:focus, textarea:focus { outline: none; border-color: #667eea; }
+        textarea { resize: vertical; min-height: 100px; }
+        .helper-text { font-size: 0.9em; color: #666; margin-top: 5px; }
+        .markers-section { background: #f8f9fa; padding: 25px; border-radius: 10px; margin-bottom: 25px; }
+        .markers-section h3 { color: #333; margin-bottom: 15px; }
+        .marker-inputs { display: flex; gap: 10px; margin-bottom: 15px; align-items: flex-start; }
+        .marker-inputs input:first-child { width: 100px; flex-shrink: 0; }
+        .marker-inputs input:last-child { flex: 1; }
+        .btn { padding: 12px 24px; border: none; border-radius: 8px; font-size: 1em; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .btn-add { background: #667eea; color: white; margin-bottom: 15px; }
+        .btn-add:hover { background: #5568d3; }
+        .markers-list { margin-top: 15px; }
+        .marker-item { background: white; padding: 12px; margin-bottom: 8px; border-radius: 6px; display: flex; justify-content: space-between; align-items: center; }
+        .marker-time-display { color: #667eea; font-weight: bold; margin-right: 10px; min-width: 60px; }
+        .btn-remove { background: #ff4444; color: white; padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer; font-size: 0.9em; }
+        .btn-remove:hover { background: #cc0000; }
+        .button-group { display: flex; gap: 15px; margin-top: 30px; }
+        .btn-primary { flex: 1; background: #667eea; color: white; padding: 15px; font-size: 1.1em; }
+        .btn-primary:hover { background: #5568d3; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3); }
+        .btn-secondary { background: #e0e0e0; color: #333; padding: 15px 30px; }
+        .btn-secondary:hover { background: #d0d0d0; }
+        .success-message { background: #d4edda; border: 1px solid #c3e6cb; color: #155724; padding: 15px; border-radius: 8px; margin-top: 20px; display: none; }
+        .success-message.show { display: block; }
     </style>
 </head>
 <body>
@@ -218,22 +45,22 @@
 
         <div class="form-group">
             <label for="song-title">Song Title *</label>
-            <input type="text" id="song-title" required>
+            <input type="text" id="song-title">
         </div>
 
         <div class="form-group">
             <label for="artist">Artist *</label>
-            <input type="text" id="artist" required>
+            <input type="text" id="artist">
         </div>
 
         <div class="form-group">
             <label for="youtube-url">YouTube URL *</label>
-            <input type="text" id="youtube-url" placeholder="https://www.youtube.com/watch?v=..." required>
+            <input type="text" id="youtube-url" placeholder="https://www.youtube.com/watch?v=...">
         </div>
 
         <div class="form-group">
             <label for="description">Description (50-60 words) *</label>
-            <textarea id="description" required></textarea>
+            <textarea id="description"></textarea>
             <div class="helper-text" id="word-count">0 words</div>
         </div>
 
@@ -243,8 +70,7 @@
                 <input type="text" id="marker-time-input" placeholder="mm:ss">
                 <input type="text" id="marker-text-input" placeholder="What to listen for...">
             </div>
-            <button class="btn btn-add" onclick="addMarker()">+ Add Marker</button>
-
+            <button class="btn btn-add" id="add-marker-btn">+ Add Marker</button>
             <div class="markers-list" id="markers-list"></div>
         </div>
 
@@ -264,8 +90,8 @@
         </div>
 
         <div class="button-group">
-            <button class="btn btn-primary" onclick="generateAndDownload()">✓ Create & Download Song Page</button>
-            <button class="btn btn-secondary" onclick="clearForm()">Clear Form</button>
+            <button class="btn btn-primary" id="create-btn">✓ Create & Download Song Page</button>
+            <button class="btn btn-secondary" id="clear-btn">Clear Form</button>
         </div>
 
         <div id="success-message" class="success-message">
@@ -274,41 +100,36 @@
     </div>
 
     <script>
-        let markers = [];
+        var markers = [];
 
-        // Word counter
         document.getElementById('description').addEventListener('input', function() {
-            const text = this.value.trim();
-            const words = text ? text.split(/\s+/).length : 0;
+            var text = this.value.trim();
+            var words = text ? text.split(/\s+/).length : 0;
             document.getElementById('word-count').textContent = words + ' words';
         });
 
-        function addMarker() {
-            const timeInput = document.getElementById('marker-time-input');
-            const textInput = document.getElementById('marker-text-input');
-
-            const time = timeInput.value.trim();
-            const text = textInput.value.trim();
+        document.getElementById('add-marker-btn').addEventListener('click', function() {
+            var timeInput = document.getElementById('marker-time-input');
+            var textInput = document.getElementById('marker-text-input');
+            var time = timeInput.value.trim();
+            var text = textInput.value.trim();
 
             if (!time || !text) {
                 alert('Please enter both time and annotation!');
                 return;
             }
 
-            // Validate time format
             if (!/^\d+:[0-5]\d$/.test(time)) {
                 alert('Time must be in mm:ss format (e.g., 3:45)');
                 return;
             }
 
-            markers.push({ time, text });
+            markers.push({ time: time, text: text });
             updateMarkersList();
-
-            // Clear inputs
             timeInput.value = '';
             textInput.value = '';
             timeInput.focus();
-        }
+        });
 
         function removeMarker(index) {
             markers.splice(index, 1);
@@ -316,162 +137,48 @@
         }
 
         function updateMarkersList() {
-            const list = document.getElementById('markers-list');
+            var list = document.getElementById('markers-list');
             list.innerHTML = '';
-
-            markers.forEach((marker, index) => {
-                const div = document.createElement('div');
+            for (var i = 0; i < markers.length; i++) {
+                var marker = markers[i];
+                var div = document.createElement('div');
                 div.className = 'marker-item';
-                div.innerHTML = `
-                    <span class="marker-time-display">${marker.time}</span>
-                    <span>${marker.text}</span>
-                    <button class="btn-remove" onclick="removeMarker(${index})">Remove</button>
-                `;
+                div.innerHTML = '<span class="marker-time-display">' + marker.time + '</span><span>' + marker.text + '</span><button class="btn-remove" onclick="removeMarker(' + i + ')">Remove</button>';
                 list.appendChild(div);
-            });
+            }
         }
 
         function timeToSeconds(timeStr) {
-            const parts = timeStr.split(':');
+            var parts = timeStr.split(':');
             if (parts.length === 2) {
-                const mins = parseInt(parts[0]) || 0;
-                const secs = parseInt(parts[1]) || 0;
+                var mins = parseInt(parts[0]) || 0;
+                var secs = parseInt(parts[1]) || 0;
                 return mins * 60 + secs;
             }
             return 0;
         }
 
         function extractYouTubeId(url) {
-            const patterns = [
+            var patterns = [
                 /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\?\/]+)/,
                 /^([a-zA-Z0-9_-]{11})$/
             ];
-
-            for (let pattern of patterns) {
-                const match = url.match(pattern);
+            for (var i = 0; i < patterns.length; i++) {
+                var match = url.match(patterns[i]);
                 if (match) return match[1];
             }
             return null;
         }
 
         function generateSlug(artist, title) {
-            return (artist + '-' + title)
-                .toLowerCase()
-                .replace(/[^a-z0-9]+/g, '-')
-                .replace(/^-+|-+$/g, '');
+            return (artist + '-' + title).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
         }
 
-        function generateHTML(data) {
-            const { title, artist, videoId, description, markers, links } = data;
-
-            // Generate markers HTML
-            let markersHtml = '';
-            for (let marker of markers) {
-                markersHtml += `
-                <div class="marker-item" data-time="${marker.seconds}">
-                    <span class="marker-time">${marker.time}</span>
-                    <span class="marker-text">${marker.text}</span>
-                </div>`;
-            }
-
-            // Generate streaming links HTML
-            let streamingLinksHtml = `
-                    <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" class="stream-link">YouTube</a>`;
-
-            if (links.spotify) {
-                streamingLinksHtml += `\n                    <a href="${links.spotify}" target="_blank" class="stream-link">Spotify</a>`;
-            }
-            if (links.appleMusic) {
-                streamingLinksHtml += `\n                    <a href="${links.appleMusic}" target="_blank" class="stream-link">Apple Music</a>`;
-            }
-            if (links.youtubeMusic) {
-                streamingLinksHtml += `\n                    <a href="${links.youtubeMusic}" target="_blank" class="stream-link">YouTube Music</a>`;
-            }
-
-            // Generate color scheme
-            const colors = [
-                ['#8b0000', '#2d1b2e'],
-                ['#667eea', '#764ba2'],
-                ['#f093fb', '#f5576c'],
-                ['#4facfe', '#00f2fe'],
-                ['#43e97b', '#38f9d7']
-            ];
-            const colorIndex = artist.length % colors.length;
-            const [color1, color2] = colors[colorIndex];
-
-            return `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${title} - ${artist}</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #1a1a1a 0%, ${color2} 100%); min-height: 100vh; padding: 40px 20px; }
-        .container { max-width: 1000px; margin: 0 auto; background: white; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); overflow: hidden; }
-        .header { background: linear-gradient(135deg, ${color1} 0%, ${color2} 100%); color: white; padding: 40px; text-align: center; }
-        .header h1 { font-size: 2.8em; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
-        .header p { font-size: 1.3em; opacity: 0.9; }
-        .content { padding: 40px; }
-        .description { font-size: 1.1em; line-height: 1.8; color: #333; margin-bottom: 30px; padding: 20px; background: #f8f9fa; border-radius: 10px; border-left: 4px solid ${color1}; }
-        .video-container { margin: 30px 0; background: #000; border-radius: 10px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
-        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
-        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-        .markers-section { margin: 40px 0; background: #f8f9fa; padding: 30px; border-radius: 10px; }
-        .markers-section h2 { color: #333; margin-bottom: 20px; font-size: 1.4em; }
-        .marker-item { background: white; padding: 18px; margin-bottom: 12px; border-radius: 8px; border-left: 4px solid ${color1}; cursor: pointer; transition: all 0.3s; display: flex; align-items: flex-start; gap: 15px; }
-        .marker-item:hover { transform: translateX(5px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); background: #fffbfb; }
-        .marker-time { color: ${color1}; font-weight: bold; font-size: 1.1em; min-width: 60px; flex-shrink: 0; }
-        .marker-text { color: #555; line-height: 1.6; }
-        .streaming-links { margin-top: 30px; padding: 25px; background: #f8f9fa; border-radius: 10px; }
-        .streaming-links h3 { color: #333; margin-bottom: 15px; font-size: 1.2em; }
-        .links-container { display: flex; gap: 15px; flex-wrap: wrap; }
-        .stream-link { display: inline-block; padding: 12px 24px; background: white; color: ${color1}; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s; border: 2px solid ${color1}; }
-        .stream-link:hover { background: ${color1}; color: white; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
-        @media (max-width: 768px) { .header h1 { font-size: 2em; } .content { padding: 20px; } }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>${title}</h1>
-            <p>${artist}</p>
-        </div>
-        <div class="content">
-            <div class="description">${description}</div>
-            <div class="video-container">
-                <div class="video-wrapper">
-                    <iframe id="youtube-player" src="https://www.youtube.com/embed/${videoId}?enablejsapi=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                </div>
-            </div>
-            <div class="markers-section">
-                <h2>Key Moments to Listen For:</h2>
-${markersHtml}
-            </div>
-            <div class="streaming-links">
-                <h3>Listen On:</h3>
-                <div class="links-container">
-${streamingLinksHtml}
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="https://www.youtube.com/iframe_api"></script>
-    <script>
-        let player;
-        function onYouTubeIframeAPIReady() { player = new YT.Player('youtube-player', { events: { 'onReady': onPlayerReady } }); }
-        function onPlayerReady(event) { document.querySelectorAll('.marker-item').forEach(item => { item.addEventListener('click', function() { const time = parseInt(this.dataset.time); player.seekTo(time, true); player.playVideo(); }); }); }
-    </script>
-</body>
-</html>`;
-        }
-
-        function generateAndDownload() {
-            // Validate inputs
-            const title = document.getElementById('song-title').value.trim();
-            const artist = document.getElementById('artist').value.trim();
-            const youtubeUrl = document.getElementById('youtube-url').value.trim();
-            const description = document.getElementById('description').value.trim();
+        document.getElementById('create-btn').addEventListener('click', function() {
+            var title = document.getElementById('song-title').value.trim();
+            var artist = document.getElementById('artist').value.trim();
+            var youtubeUrl = document.getElementById('youtube-url').value.trim();
+            var description = document.getElementById('description').value.trim();
 
             if (!title || !artist || !youtubeUrl || !description) {
                 alert('Please fill in all required fields!');
@@ -483,50 +190,56 @@ ${streamingLinksHtml}
                 return;
             }
 
-            const videoId = extractYouTubeId(youtubeUrl);
+            var videoId = extractYouTubeId(youtubeUrl);
             if (!videoId) {
                 alert('Please enter a valid YouTube URL!');
                 return;
             }
 
-            // Prepare markers with seconds
-            const markersData = markers.map(m => ({
-                time: m.time,
-                seconds: timeToSeconds(m.time),
-                text: m.text
-            }));
+            var colors = [
+                ['#8b0000', '#2d1b2e'],
+                ['#667eea', '#764ba2'],
+                ['#f093fb', '#f5576c'],
+                ['#4facfe', '#00f2fe'],
+                ['#43e97b', '#38f9d7']
+            ];
+            var colorIndex = artist.length % colors.length;
+            var color1 = colors[colorIndex][0];
+            var color2 = colors[colorIndex][1];
 
-            // Generate HTML
-            const html = generateHTML({
-                title,
-                artist,
-                videoId,
-                description,
-                markers: markersData,
-                links: {
-                    spotify: document.getElementById('spotify-link').value.trim(),
-                    appleMusic: document.getElementById('apple-music-link').value.trim(),
-                    youtubeMusic: document.getElementById('youtube-music-link').value.trim()
-                }
-            });
+            var markersHtml = '';
+            for (var i = 0; i < markers.length; i++) {
+                var m = markers[i];
+                var seconds = timeToSeconds(m.time);
+                markersHtml += '\n                <div class="marker-item" data-time="' + seconds + '">\n                    <span class="marker-time">' + m.time + '</span>\n                    <span class="marker-text">' + m.text + '</span>\n                </div>';
+            }
 
-            // Download file
-            const filename = generateSlug(artist, title) + '.html';
-            const blob = new Blob([html], { type: 'text/html' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
+            var streamingLinksHtml = '\n                    <a href="' + youtubeUrl + '" target="_blank" class="stream-link">YouTube</a>';
+            var spotifyLink = document.getElementById('spotify-link').value.trim();
+            var appleMusicLink = document.getElementById('apple-music-link').value.trim();
+            var youtubeMusicLink = document.getElementById('youtube-music-link').value.trim();
+
+            if (spotifyLink) streamingLinksHtml += '\n                    <a href="' + spotifyLink + '" target="_blank" class="stream-link">Spotify</a>';
+            if (appleMusicLink) streamingLinksHtml += '\n                    <a href="' + appleMusicLink + '" target="_blank" class="stream-link">Apple Music</a>';
+            if (youtubeMusicLink) streamingLinksHtml += '\n                    <a href="' + youtubeMusicLink + '" target="_blank" class="stream-link">YouTube Music</a>';
+
+            var html = '<!DOCTYPE html>\n<html lang="en">\n<head>\n    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <title>' + title + ' - ' + artist + '</title>\n    <style>\n        * { margin: 0; padding: 0; box-sizing: border-box; }\n        body { font-family: \'Segoe UI\', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #1a1a1a 0%, ' + color2 + ' 100%); min-height: 100vh; padding: 40px 20px; }\n        .container { max-width: 1000px; margin: 0 auto; background: white; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); overflow: hidden; }\n        .header { background: linear-gradient(135deg, ' + color1 + ' 0%, ' + color2 + ' 100%); color: white; padding: 40px; text-align: center; }\n        .header h1 { font-size: 2.8em; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }\n        .header p { font-size: 1.3em; opacity: 0.9; }\n        .content { padding: 40px; }\n        .description { font-size: 1.1em; line-height: 1.8; color: #333; margin-bottom: 30px; padding: 20px; background: #f8f9fa; border-radius: 10px; border-left: 4px solid ' + color1 + '; }\n        .video-container { margin: 30px 0; background: #000; border-radius: 10px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.3); }\n        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }\n        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }\n        .markers-section { margin: 40px 0; background: #f8f9fa; padding: 30px; border-radius: 10px; }\n        .markers-section h2 { color: #333; margin-bottom: 20px; font-size: 1.4em; }\n        .marker-item { background: white; padding: 18px; margin-bottom: 12px; border-radius: 8px; border-left: 4px solid ' + color1 + '; cursor: pointer; transition: all 0.3s; display: flex; align-items: flex-start; gap: 15px; }\n        .marker-item:hover { transform: translateX(5px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); background: #fffbfb; }\n        .marker-time { color: ' + color1 + '; font-weight: bold; font-size: 1.1em; min-width: 60px; flex-shrink: 0; }\n        .marker-text { color: #555; line-height: 1.6; }\n        .streaming-links { margin-top: 30px; padding: 25px; background: #f8f9fa; border-radius: 10px; }\n        .streaming-links h3 { color: #333; margin-bottom: 15px; font-size: 1.2em; }\n        .links-container { display: flex; gap: 15px; flex-wrap: wrap; }\n        .stream-link { display: inline-block; padding: 12px 24px; background: white; color: ' + color1 + '; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s; border: 2px solid ' + color1 + '; }\n        .stream-link:hover { background: ' + color1 + '; color: white; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.3); }\n        @media (max-width: 768px) { .header h1 { font-size: 2em; } .content { padding: 20px; } }\n    </style>\n</head>\n<body>\n    <div class="container">\n        <div class="header">\n            <h1>' + title + '</h1>\n            <p>' + artist + '</p>\n        </div>\n        <div class="content">\n            <div class="description">' + description + '</div>\n            <div class="video-container">\n                <div class="video-wrapper">\n                    <iframe id="youtube-player" src="https://www.youtube.com/embed/' + videoId + '?enablejsapi=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>\n                </div>\n            </div>\n            <div class="markers-section">\n                <h2>Key Moments to Listen For:</h2>' + markersHtml + '\n            </div>\n            <div class="streaming-links">\n                <h3>Listen On:</h3>\n                <div class="links-container">' + streamingLinksHtml + '\n                </div>\n            </div>\n        </div>\n    </div>\n    <script src="https://www.youtube.com/iframe_api"><\/script>\n    <script>\n        var player;\n        function onYouTubeIframeAPIReady() { player = new YT.Player(\'youtube-player\', { events: { \'onReady\': onPlayerReady } }); }\n        function onPlayerReady(event) { document.querySelectorAll(\'.marker-item\').forEach(function(item) { item.addEventListener(\'click\', function() { var time = parseInt(this.dataset.time); player.seekTo(time, true); player.playVideo(); }); }); }\n    <\/script>\n</body>\n</html>';
+
+            var filename = generateSlug(artist, title) + '.html';
+            var blob = new Blob([html], { type: 'text/html' });
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
             a.href = url;
             a.download = filename;
             a.click();
             URL.revokeObjectURL(url);
 
-            // Show success message
-            const successMsg = document.getElementById('success-message');
+            var successMsg = document.getElementById('success-message');
             successMsg.classList.add('show');
-            setTimeout(() => successMsg.classList.remove('show'), 5000);
-        }
+            setTimeout(function() { successMsg.classList.remove('show'); }, 5000);
+        });
 
-        function clearForm() {
+        document.getElementById('clear-btn').addEventListener('click', function() {
             if (confirm('Are you sure you want to clear the form?')) {
                 document.getElementById('song-title').value = '';
                 document.getElementById('artist').value = '';
@@ -539,7 +252,7 @@ ${streamingLinksHtml}
                 markers = [];
                 updateMarkersList();
             }
-        }
+        });
     </script>
 </body>
 </html>
