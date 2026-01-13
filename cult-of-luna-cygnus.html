@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cygnus - Cult of Luna</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #1a1a1a 0%, #f5576c 100%); min-height: 100vh; padding: 40px 20px; }
+        .container { max-width: 1000px; margin: 0 auto; background: white; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); overflow: hidden; }
+        .header { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 40px; text-align: center; }
+        .header h1 { font-size: 2.8em; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .header p { font-size: 1.3em; opacity: 0.9; }
+        .content { padding: 40px; }
+        .description { font-size: 1.1em; line-height: 1.8; color: #333; margin-bottom: 30px; padding: 20px; background: #f8f9fa; border-radius: 10px; border-left: 4px solid #f093fb; }
+        .video-container { margin: 30px 0; background: #000; border-radius: 10px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .markers-section { margin: 40px 0; background: #f8f9fa; padding: 30px; border-radius: 10px; }
+        .markers-section h2 { color: #333; margin-bottom: 20px; font-size: 1.4em; }
+        .marker-item { background: white; padding: 18px; margin-bottom: 12px; border-radius: 8px; border-left: 4px solid #f093fb; cursor: pointer; transition: all 0.3s; display: flex; align-items: flex-start; gap: 15px; }
+        .marker-item:hover { transform: translateX(5px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); background: #fffbfb; }
+        .marker-time { color: #f093fb; font-weight: bold; font-size: 1.1em; min-width: 60px; flex-shrink: 0; }
+        .marker-text { color: #555; line-height: 1.6; }
+        .streaming-links { margin-top: 30px; padding: 25px; background: #f8f9fa; border-radius: 10px; }
+        .streaming-links h3 { color: #333; margin-bottom: 15px; font-size: 1.2em; }
+        .links-container { display: flex; gap: 15px; flex-wrap: wrap; }
+        .stream-link { display: inline-block; padding: 12px 24px; background: white; color: #f093fb; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s; border: 2px solid #f093fb; }
+        .stream-link:hover { background: #f093fb; color: white; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+        @media (max-width: 768px) { .header h1 { font-size: 2em; } .content { padding: 20px; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Cygnus</h1>
+            <p>Cult of Luna</p>
+        </div>
+        <div class="content">
+            <div class="description">Absolute catharsis.
+This song gets me through tough times.
+It's not the easiest of listens by ANY means, and I wouldn't unleash it on anyone who can't handle heavy. But my god, the atmosphere, the sheer feeling, the layering... and that fucking outro. HOLY SHIT.</div>
+            <div class="video-container">
+                <div class="video-wrapper">
+                    <iframe id="youtube-player" src="https://www.youtube.com/embed/DVdHw4fskj4?enablejsapi=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+            <div class="markers-section">
+                <h2>Key Moments to Listen For:</h2>
+                <div class="marker-item" data-time="590">
+                    <span class="marker-time">9:50</span>
+                    <span class="marker-text">One of the greatest outros ever, I swear.</span>
+                </div>
+            </div>
+            <div class="streaming-links">
+                <h3>Listen On:</h3>
+                <div class="links-container">
+                    <a href="https://www.youtube.com/watch?v=DVdHw4fskj4" target="_blank" class="stream-link">YouTube</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+        var player;
+        function onYouTubeIframeAPIReady() { player = new YT.Player('youtube-player', { events: { 'onReady': onPlayerReady } }); }
+        function onPlayerReady(event) { document.querySelectorAll('.marker-item').forEach(function(item) { item.addEventListener('click', function() { var time = parseInt(this.dataset.time); player.seekTo(time, true); player.playVideo(); }); }); }
+    </script>
+</body>
+</html>
