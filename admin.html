@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Song Manager - Admin</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .helper-text {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .markers-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        .marker-input {
+            display: grid;
+            grid-template-columns: 100px 1fr 40px;
+            gap: 10px;
+            margin-bottom: 15px;
+            align-items: start;
+        }
+
+        .marker-input input[type="number"] {
+            width: 100%;
+        }
+
+        .remove-marker {
+            background: #ff4444;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2em;
+            padding: 10px;
+            transition: background 0.3s;
+        }
+
+        .remove-marker:hover {
+            background: #cc0000;
+        }
+
+        .add-marker {
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .add-marker:hover {
+            background: #5568d3;
+        }
+
+        .links-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #d0d0d0;
+        }
+
+        .output-section {
+            margin-top: 40px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .output-section.active {
+            display: block;
+        }
+
+        .output-section h2 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .code-output {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .copy-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .copy-btn:hover {
+            background: #218838;
+        }
+
+        .instructions {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+
+        .instructions h3 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .instructions p {
+            color: #856404;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .marker-input {
+                grid-template-columns: 1fr;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎵 Song Manager</h1>
+        <p class="subtitle">Add a new song to your collection</p>
+
+        <div class="instructions">
+            <h3>How to use:</h3>
+            <p>
+                1. Fill in the form below with your song details<br>
+                2. Click "Generate Page Code"<br>
+                3. Copy the code and save it as a new HTML file (e.g., artist-songname.html)<br>
+                4. Update index.html to add a link to your new song
+            </p>
+        </div>
+
+        <form id="song-form">
+            <div class="form-group">
+                <label for="song-title">Song Title *</label>
+                <input type="text" id="song-title" required>
+            </div>
+
+            <div class="form-group">
+                <label for="artist">Artist *</label>
+                <input type="text" id="artist" required>
+            </div>
+
+            <div class="form-group">
+                <label for="youtube-url">YouTube URL *</label>
+                <input type="text" id="youtube-url" placeholder="https://www.youtube.com/watch?v=..." required>
+                <div class="helper-text">Paste the full YouTube URL</div>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description (50-60 words) *</label>
+                <textarea id="description" required></textarea>
+                <div class="helper-text" id="word-count">0 words</div>
+            </div>
+
+            <div class="markers-section">
+                <h3 style="margin-bottom: 15px; color: #333;">Timestamps & Annotations</h3>
+                <div id="markers-container">
+                    <div class="marker-input">
+                        <input type="number" placeholder="Seconds" class="marker-time" required>
+                        <input type="text" placeholder="What to listen for..." class="marker-text" required>
+                        <button type="button" class="remove-marker" onclick="removeMarker(this)">×</button>
+                    </div>
+                </div>
+                <button type="button" class="add-marker" onclick="addMarker()">+ Add Marker</button>
+            </div>
+
+            <div class="links-section">
+                <h3 style="margin-bottom: 15px; color: #333;">Streaming Links</h3>
+                <div class="form-group">
+                    <label for="spotify-link">Spotify Link</label>
+                    <input type="text" id="spotify-link" placeholder="https://open.spotify.com/...">
+                </div>
+                <div class="form-group">
+                    <label for="apple-music-link">Apple Music Link</label>
+                    <input type="text" id="apple-music-link" placeholder="https://music.apple.com/...">
+                </div>
+                <div class="form-group">
+                    <label for="youtube-music-link">YouTube Music Link</label>
+                    <input type="text" id="youtube-music-link" placeholder="https://music.youtube.com/...">
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="btn btn-primary">Generate Page Code</button>
+                <button type="button" class="btn btn-secondary" onclick="resetForm()">Clear Form</button>
+            </div>
+        </form>
+
+        <div class="output-section" id="output-section">
+            <h2>Generated HTML Code</h2>
+            <p style="margin-bottom: 15px; color: #666;">Copy this code and save it as a new .html file in your repository</p>
+            <div class="code-output" id="code-output"></div>
+            <button class="copy-btn" onclick="copyCode()">Copy to Clipboard</button>
+        </div>
+    </div>
+
+    <script>
+        // Word counter
+        document.getElementById('description').addEventListener('input', function() {
+            const text = this.value.trim();
+            const words = text ? text.split(/\s+/).length : 0;
+            document.getElementById('word-count').textContent = words + ' words';
+        });
+
+        // Add marker
+        function addMarker() {
+            const container = document.getElementById('markers-container');
+            const markerDiv = document.createElement('div');
+            markerDiv.className = 'marker-input';
+            markerDiv.innerHTML = `
+                <input type="number" placeholder="Seconds" class="marker-time" required>
+                <input type="text" placeholder="What to listen for..." class="marker-text" required>
+                <button type="button" class="remove-marker" onclick="removeMarker(this)">×</button>
+            `;
+            container.appendChild(markerDiv);
+        }
+
+        // Remove marker
+        function removeMarker(button) {
+            const container = document.getElementById('markers-container');
+            if (container.children.length > 1) {
+                button.parentElement.remove();
+            } else {
+                alert('You must have at least one marker!');
+            }
+        }
+
+        // Extract YouTube video ID
+        function extractYouTubeId(url) {
+            const patterns = [
+                /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\?\/]+)/,
+                /^([a-zA-Z0-9_-]{11})$/
+            ];
+
+            for (let pattern of patterns) {
+                const match = url.match(pattern);
+                if (match) return match[1];
+            }
+            return null;
+        }
+
+        // Format time
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return mins + ':' + (secs < 10 ? '0' : '') + secs;
+        }
+
+        // Generate slug
+        function generateSlug(artist, title) {
+            return (artist + '-' + title)
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/^-+|-+$/g, '');
+        }
+
+        // Generate page
+        document.getElementById('song-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const title = document.getElementById('song-title').value;
+            const artist = document.getElementById('artist').value;
+            const youtubeUrl = document.getElementById('youtube-url').value;
+            const description = document.getElementById('description').value;
+            const spotifyLink = document.getElementById('spotify-link').value;
+            const appleMusicLink = document.getElementById('apple-music-link').value;
+            const youtubeMusicLink = document.getElementById('youtube-music-link').value;
+
+            // Extract video ID
+            const videoId = extractYouTubeId(youtubeUrl);
+            if (!videoId) {
+                alert('Invalid YouTube URL! Please check and try again.');
+                return;
+            }
+
+            // Get markers
+            const markerTimes = Array.from(document.querySelectorAll('.marker-time')).map(el => parseInt(el.value));
+            const markerTexts = Array.from(document.querySelectorAll('.marker-text')).map(el => el.value);
+
+            // Generate markers HTML
+            let markersHtml = '';
+            for (let i = 0; i < markerTimes.length; i++) {
+                markersHtml += `
+                <div class="marker-item" data-time="${markerTimes[i]}">
+                    <span class="marker-time">${formatTime(markerTimes[i])}</span>
+                    <span class="marker-text">${markerTexts[i]}</span>
+                </div>\n`;
+            }
+
+            // Generate streaming links HTML
+            let streamingLinksHtml = `
+                    <a href="${youtubeUrl}" target="_blank" class="stream-link">YouTube</a>`;
+
+            if (spotifyLink) {
+                streamingLinksHtml += `\n                    <a href="${spotifyLink}" target="_blank" class="stream-link">Spotify</a>`;
+            }
+            if (appleMusicLink) {
+                streamingLinksHtml += `\n                    <a href="${appleMusicLink}" target="_blank" class="stream-link">Apple Music</a>`;
+            }
+            if (youtubeMusicLink) {
+                streamingLinksHtml += `\n                    <a href="${youtubeMusicLink}" target="_blank" class="stream-link">YouTube Music</a>`;
+            }
+
+            // Generate color scheme based on artist name
+            const colors = [
+                ['#8b0000', '#2d1b2e'],
+                ['#667eea', '#764ba2'],
+                ['#f093fb', '#f5576c'],
+                ['#4facfe', '#00f2fe'],
+                ['#43e97b', '#38f9d7']
+            ];
+            const colorIndex = artist.length % colors.length;
+            const [color1, color2] = colors[colorIndex];
+
+            const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${title} - ${artist}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, ${color2} 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, ${color1} 0%, ${color2} 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .description {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid ${color1};
+        }
+
+        .video-container {
+            margin: 30px 0;
+            background: #000;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .markers-section {
+            margin: 40px 0;
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        .markers-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+        }
+
+        .marker-item {
+            background: white;
+            padding: 18px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+            border-left: 4px solid ${color1};
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .marker-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(${parseInt(color1.slice(1,3), 16)}, ${parseInt(color1.slice(3,5), 16)}, ${parseInt(color1.slice(5,7), 16)}, 0.2);
+            background: #fffbfb;
+        }
+
+        .marker-time {
+            color: ${color1};
+            font-weight: bold;
+            font-size: 1.1em;
+            min-width: 60px;
+            flex-shrink: 0;
+        }
+
+        .marker-text {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .streaming-links {
+            margin-top: 30px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .streaming-links h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .links-container {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .stream-link {
+            display: inline-block;
+            padding: 12px 24px;
+            background: white;
+            color: ${color1};
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid ${color1};
+        }
+
+        .stream-link:hover {
+            background: ${color1};
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(${parseInt(color1.slice(1,3), 16)}, ${parseInt(color1.slice(3,5), 16)}, ${parseInt(color1.slice(5,7), 16)}, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>${title}</h1>
+            <p>${artist}</p>
+        </div>
+
+        <div class="content">
+            <div class="description">
+                ${description}
+            </div>
+
+            <div class="video-container">
+                <div class="video-wrapper">
+                    <iframe id="youtube-player"
+                        src="https://www.youtube.com/embed/${videoId}?enablejsapi=1"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+
+            <div class="markers-section">
+                <h2>Key Moments to Listen For:</h2>
+${markersHtml}
+            </div>
+
+            <div class="streaming-links">
+                <h3>Listen On:</h3>
+                <div class="links-container">
+${streamingLinksHtml}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+        let player;
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            document.querySelectorAll('.marker-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const time = parseInt(this.dataset.time);
+                    player.seekTo(time, true);
+                    player.playVideo();
+                });
+            });
+        }
+    </script>
+</body>
+</html>`;
+
+            // Show output
+            document.getElementById('code-output').textContent = html;
+            document.getElementById('output-section').classList.add('active');
+            document.getElementById('output-section').scrollIntoView({ behavior: 'smooth' });
+
+            // Show filename suggestion
+            const filename = generateSlug(artist, title) + '.html';
+            alert('✅ Page generated! Save this as: ' + filename);
+        });
+
+        // Copy to clipboard
+        function copyCode() {
+            const code = document.getElementById('code-output').textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                const btn = event.target;
+                btn.textContent = '✓ Copied!';
+                btn.style.background = '#28a745';
+                setTimeout(() => {
+                    btn.textContent = 'Copy to Clipboard';
+                }, 2000);
+            });
+        }
+
+        // Reset form
+        function resetForm() {
+            if (confirm('Are you sure you want to clear the form?')) {
+                document.getElementById('song-form').reset();
+                document.getElementById('word-count').textContent = '0 words';
+                document.getElementById('output-section').classList.remove('active');
+            }
+        }
+    </script>
+</body>
+</html>
