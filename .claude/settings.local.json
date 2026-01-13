@@ -7,7 +7,8 @@
       "Bash(where npx:*)",
       "Bash(where:*)",
       "Bash(git init:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git rebase:*)"
     ]
   }
 }
