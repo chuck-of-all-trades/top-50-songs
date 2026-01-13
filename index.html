@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Top 50 Songs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 60px;
+        }
+
+        header h1 {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.3em;
+            opacity: 0.95;
+        }
+
+        .song-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .song-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .song-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .song-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .song-title {
+            font-size: 1.5em;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .song-artist {
+            font-size: 1.1em;
+            color: #666;
+        }
+
+        .coming-soon {
+            opacity: 0.6;
+            cursor: default;
+        }
+
+        .coming-soon:hover {
+            transform: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5em;
+            }
+
+            .song-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>My Top 50 Songs of All Time</h1>
+            <p>A curated collection of the music that moves me</p>
+        </header>
+
+        <div class="song-grid">
+            <a href="song.html" class="song-card">
+                <div class="song-number">#1</div>
+                <div class="song-title">Ghost of Perdition</div>
+                <div class="song-artist">Opeth</div>
+            </a>
+
+            <div class="song-card coming-soon">
+                <div class="song-number">#2</div>
+                <div class="song-title">Coming Soon</div>
+                <div class="song-artist">TBA</div>
+            </div>
+
+            <div class="song-card coming-soon">
+                <div class="song-number">#3</div>
+                <div class="song-title">Coming Soon</div>
+                <div class="song-artist">TBA</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
